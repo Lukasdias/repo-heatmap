@@ -1,46 +1,38 @@
 # repo-heatmap
 
-A CLI tool that visualizes repository file changes as an interactive heatmap graph. See which files have been modified most frequently and explore the codebase structure with an intuitive web-based visualization powered by Cytoscape.js.
+CLI tool for generating interactive heatmap visualizations of git repository file changes. Analyzes commit history and displays results in a web-based graph using Cytoscape.js.
 
 ## Features
 
-- **Git Repository Analysis**: Analyzes git history to find the most frequently changed files
-- **Interactive Graph Visualization**: Web-based heatmap showing file change frequency
-- **Directory Hierarchy**: Visual representation of directory structure and relationships
-- **Change Intensity**: Color-coded nodes from blue (low changes) to red (high changes)
-- **Search & Filter**: Search for specific files and highlight related nodes
-- **Date Range Filtering**: Analyze changes within specific time periods
-- **Pattern Filtering**: Include or exclude files based on patterns
-- **Interactive TUI**: User-friendly prompts powered by Clack
-- **Fast Performance**: Built with Bun for rapid startup and execution
+- Parses git log to aggregate file change statistics
+- Generates force-directed graph visualization
+- Color-codes nodes by change frequency (blue to red gradient)
+- Supports date range and pattern filtering
+- Provides interactive TUI prompts via Clack
 
 ## Installation
-
-### Global Installation
 
 ```bash
 bun install -g repo-heatmap
 ```
 
-### Local Usage
+Or use locally:
 
 ```bash
 bun install
 bun run dev -- --path /path/to/repo
 ```
 
-### Compile to Binary
+### Binary Compilation
 
 ```bash
 bun run compile
-# Creates ./dist/repo-heatmap binary
+# Output: ./dist/repo-heatmap
 ```
 
 ## Usage
 
-### Interactive Mode (Recommended)
-
-Launch with prompts to configure all options:
+### Interactive Mode
 
 ```bash
 repo-heatmap --interactive
@@ -49,102 +41,91 @@ repo-heatmap --interactive
 ### Command Line
 
 ```bash
-# Analyze current directory
+# Current directory
 repo-heatmap
 
-# Analyze specific repository
+# Specific path
 repo-heatmap --path /path/to/repo
 
 # Custom port
 repo-heatmap --port 8080
 
-# Date range
+# Date range filtering
 repo-heatmap --since "2024-01-01" --until "2024-12-31"
 
 # Exclude patterns
 repo-heatmap --exclude "node_modules,dist,*.lock"
 
-# Include only specific patterns
+# Include patterns
 repo-heatmap --include "src/"
 
-# Limit files displayed
+# Limit displayed files
 repo-heatmap --max-files 50
 
-# Don't open browser
+# Disable browser opening
 repo-heatmap --no-open
 ```
 
-### Options
+## Options
 
 | Option | Description | Default |
 |--------|-------------|---------|
 | `-p, --path <path>` | Repository path | `.` |
 | `--port <port>` | Server port | `3000` |
-| `--since <date>` | Analyze commits since date | - |
-| `--until <date>` | Analyze commits until date | - |
-| `--max-files <number>` | Maximum files to display | `100` |
-| `--exclude <patterns>` | Comma-separated patterns to exclude | - |
-| `--include <patterns>` | Comma-separated patterns to include | - |
-| `--no-open` | Don't open browser | - |
+| `--since <date>` | Start date for analysis | - |
+| `--until <date>` | End date for analysis | - |
+| `--max-files <number>` | Maximum files to render | `100` |
+| `--exclude <patterns>` | Comma-separated exclusion patterns | - |
+| `--include <patterns>` | Comma-separated inclusion patterns | - |
+| `--no-open` | Skip browser auto-open | - |
 | `--interactive` | Use interactive prompts | - |
-| `-h, --help` | Display help | - |
-| `-V, --version` | Display version | - |
 
-## Visualization Features
-
-The web interface provides:
-
-- **Interactive Graph**: Drag nodes, zoom, and pan
-- **Node Highlighting**: Click a node to highlight its connections
-- **Search**: Find files by name with real-time filtering
-- **Heatmap Legend**: Visual guide for change intensity
-- **Statistics**: Total files, changes, and date range
-- **Responsive Design**: Works on different screen sizes
+## Visualization
 
 ### Graph Elements
 
 - **Circles**: Files
 - **Rounded Rectangles**: Directories
-- **Color Intensity**:
-  - Blue: Low changes
-  - Green: Medium-low changes
-  - Yellow: Medium changes
-  - Orange: Medium-high changes
-  - Red: High changes
-- **Size**: Proportional to number of changes
+- **Edge**: Parent-child relationship
+
+### Color Scale
+
+| Color | Change Frequency |
+|-------|-----------------|
+| Blue | Low |
+| Green | Medium-low |
+| Yellow | Medium |
+| Orange | Medium-high |
+| Red | High |
+
+### Interactions
+
+- Drag nodes to reposition
+- Click node to highlight connections
+- Search input for file filtering
+- Zoom/pan controls
 
 ## Development
 
 ```bash
-# Install dependencies
-bun install
-
-# Run in development
-bun run dev
-
-# Build
-bun run build
-
-# Type check
-bun run typecheck
-
-# Lint
-bun run lint
+bun install        # Install dependencies
+bun run dev        # Development mode
+bun run build      # Build to ./dist
+bun run typecheck  # TypeScript check
+bun run lint       # Lint code
 ```
 
 ## Requirements
 
-- [Bun](https://bun.sh/) 1.0.0 or higher
-- Git repository to analyze
+- Bun 1.0.0+
+- Git repository
 
-## Tech Stack
+## Dependencies
 
-- **Runtime**: Bun
-- **CLI Framework**: Commander.js
-- **Interactive Prompts**: @clack/prompts
-- **Graph Visualization**: Cytoscape.js
-- **Server**: Bun.serve()
-- **Styling**: Tailwind-like CSS
+- Bun (runtime)
+- Commander.js (CLI)
+- @clack/prompts (TUI)
+- Cytoscape.js (visualization)
 
 ## License
 
