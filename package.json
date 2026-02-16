@@ -1,0 +1,41 @@
+{
+  "name": "repo-heatmap",
+  "version": "1.0.0",
+  "description": "Visualize repository file changes as an interactive heatmap graph",
+  "module": "src/cli.ts",
+  "type": "module",
+  "bin": {
+    "repo-heatmap": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev": "bun run src/cli.ts",
+    "build": "bun build --target=bun --outdir=./dist ./src/cli.ts && chmod +x ./dist/cli.js",
+    "compile": "bun build --compile --outfile=./dist/repo-heatmap ./src/cli.ts",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "commander": "^12.0.0",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "git",
+    "repository",
+    "heatmap",
+    "visualization",
+    "cli",
+    "cytoscape",
+    "graph"
+  ],
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  }
+}
