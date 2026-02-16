@@ -212,3 +212,4 @@ export function validateRepository(repoPath: string): Promise<boolean> {
     git.on('close', (code) => resolve(code === 0));
   });
 }
+// Additional utility functions
