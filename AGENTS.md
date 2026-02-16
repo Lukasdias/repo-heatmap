@@ -136,3 +136,31 @@ src/
 - Sanitize file paths
 - Don't log sensitive git data
 - Validate repository path before operations
+
+## Testing Strategy
+
+### Current State
+No automated test suite is configured. Testing is manual via:
+- Run CLI against various git repositories
+- Test different date ranges and filters
+- Verify browser opens correctly on each platform
+
+### Future Testing (TODO)
+- Add Vitest or Bun's native test runner
+- Unit tests for git parsing functions
+- Integration tests for server startup
+- Mock git repositories for consistent testing
+
+## Documentation Standards
+
+### README Updates
+- Keep feature lists factual and concise
+- Include concrete usage examples
+- Document all CLI options in tables
+- No marketing language or superlatives
+
+### Code Comments
+- Explain "why" not "what"
+- Document complex algorithms
+- Keep comments up-to-date with code changes
+- Use JSDoc for public APIs
